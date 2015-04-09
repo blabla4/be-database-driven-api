@@ -24,6 +24,7 @@ router.get('/:api/:method/*', function(req, res) {
       });
     });
   });
+  res.status(200).end();
 });
 
 module.exports = router;
