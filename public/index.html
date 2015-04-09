@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+  </head>
+  <body>
+    <textarea id="code" onchange="render()" style="width:50%;height:50%;"></textarea>
+    <div id="txt"></div>
+  </body>
+  <script>
+    function render() {
+      $("#txt").html(JSON.stringify($("#code").val().replace(/(\r\n|\n|\r)/gm," ")));
+    }
+  </script>
+</html>

@@ -6,19 +6,19 @@ var method = require('../models/method');
 
 var router = express.Router();
 
-rest = require('restler');
+restClient = require('restler');
 
 router.get('/:api/:method/*', function(req, res) {
   response = res;
   argument = req.url.split('/').slice(3);
-  var _api = req.params.api;
-  var _method = req.params.method;
-  api.findOne({basePath: _api}, function (err, api) {
-    api.methods.forEach(function(methodId) {
-      method.findById(methodId, function(err, method) {
-        if(method.name == _method) {
-          var script = vm.createScript(method.script);
-          script.runInThisContext();
+  var apiName = req.params.api;
+  var methodName = req.params.method;
+  api.findOne({name: apiName}, function (err, _api) {
+    host = _api.host;
+    _api.methods.forEach(function(methodId) {
+      method.findById(methodId, function(err, _method) {
+        if(_method.name == methodName) {
+          vm.createScript(_method.script).runInThisContext();
         }
       });
     });
