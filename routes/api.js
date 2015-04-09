@@ -7,7 +7,7 @@ var method = require('../models/method');
 var router = express.Router();
 
 restClient = require('restler');
-helper = require('./helper');
+helper = require('../helper/helper');
 
 router.get('/:api/:method/*', function(req, res) {
   response = res;

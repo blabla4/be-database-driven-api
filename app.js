@@ -5,11 +5,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var restify = require('express-restify-mongoose');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://10.134.15.103:27017/be-database-driven-api');
 mongoose.connection.once('open', function () {
   console.log('Connected to database');
 });
+var apiModel = require('./models/api');
+var methodModel = require('./models/method');
 
 var routes = require('./routes/index');
 var api = require('./routes/api');
@@ -30,6 +33,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/api', api);
+
+var router = express.Router();
+var options = {
+  prefix: "",
+  version: ""
+};
+restify.serve(router, apiModel, options);
+restify.serve(router, methodModel, options);
+app.use(router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
