@@ -1,0 +1,10 @@
+{
+  "name": "be-database-driven-api",
+  "version": "0.0.1",
+  "homepage": "https://github.com/blabla4/be-database-driven-api",
+  "license": "MIT",
+  "dependencies": {
+      "jquery": "latest",
+      "codemirror": "latest"
+  }
+}
