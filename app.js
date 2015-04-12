@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var restify = require('express-restify-mongoose');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://10.134.15.103:27017/be-database-driven-api');
+mongoose.connect('mongodb://localhost:27017/be-database-driven-api');
 mongoose.connection.once('open', function () {
   console.log('Connected to database');
 });
@@ -21,7 +21,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
