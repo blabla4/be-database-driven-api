@@ -3,3 +3,51 @@
   border: 5px solid black;
   padding: 5px;
 }
+
+body {
+  font-family: 'Open Sans';
+}
+
+.api {
+  font-size: xx-large;
+}
+
+.method_header {
+  background-color: rgba(35,146,247,.1);
+}
+
+.api_elt {
+  margin-left: 2%;
+}
+
+.method_body {
+  padding: 1%;
+}
+
+.method_title {
+  color: #2392f7;
+}
+
+.path {
+  font-family: 'Source Code Pro';
+  color: white;
+  background-color: #2392f7;
+  border-bottom-right-radius: 5px;
+  display:table;
+  padding: 1%;
+}
+
+.type {
+  font-family: 'Open Sans';
+}
+
+.method {
+  border: 2px solid #2392f7;
+  border-radius: 5px;
+  margin-top: 2%;
+}
+
+.doc {
+  width: 60%;
+  margin: 0 auto;
+}
