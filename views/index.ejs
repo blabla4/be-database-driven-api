@@ -19,7 +19,26 @@
               <div class="method_header"><div class="path"><span class="type"><%= method.type %></span>/<%= method.name %></div></div>
               <div class="method_body">
                 <span class="method_title">Description</span>
-                <div class="method_description"><%= method.name %></div>
+                <div class="method_description"><%= method.description %></div>
+                <span class="method_title">Parameters</span>
+                <div class="method_description">
+                  <table class="params">
+                    <tr>
+                      <th>Name</th>
+                      <th>Located in</th>
+                      <th>Description</th>
+                      <th>Schema</th>
+                    </tr>
+                    <% method.parameters.forEach(function(param) { %>
+                      <tr>
+                        <td><%= param.name %></td>
+                        <td><%= param.locatedIn %></td>
+                        <td><%= param.description %></td>
+                        <td><%= param.schema %></td>
+                      </tr>
+                    <% }); %>
+                  </table>
+                </div>
               </div>
             </div>
           <% }) %>

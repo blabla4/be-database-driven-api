@@ -36,6 +36,14 @@ body {
   display:table;
   padding: 1%;
 }
+.params {
+  display: table;
+}
+tr {
+}
+.method_description {
+  margin: 1%;
+}
 
 .type {
   font-family: 'Open Sans';
