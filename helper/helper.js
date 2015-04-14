@@ -1,6 +1,16 @@
+var hue = require('hue-module');
+var Color = require("color");
+
 var helper = {
   get_ir_code: function(value) {
     return getKeyByValue(remote, value);
+  },
+  set_hue_color: function(host, key, light, color) {
+    hue.load(host, key);
+    hue.light(parseInt(light), function(light){
+        var c = Color(color);
+        hue.change(light.set({"on": true, "rgb":[c.red(),c.green(),c.blue()]}));
+    });
   }
 };
 

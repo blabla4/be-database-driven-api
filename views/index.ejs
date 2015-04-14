@@ -8,22 +8,38 @@
   </head>
   <body>
     <div class="doc">
+
       <div class="api">API Documentation</div>
       <span class="api_description">Base path : /api</span>
+
       <% apis.forEach(function(api) { %>
+
         <div class="api_elt">
+
           <div class="api">/<%= api.name %></div>
           <span class="api_description"><%= api.description %></span>
+
           <% api.methods.forEach(function(method) { %>
+
             <div class="method">
-              <div class="method_header"><div class="path"><span class="type"><%= method.type %></span>/<%= method.name %></div></div>
+
+              <div class="method_header">
+                <div class="path">
+                  <span class="type"><%= method.type %></span>
+                  /<%= method.name %><% method.parameters.forEach(function(param) {if(param.locatedIn == 'path') { %>/{<%= param.name %>}<%}}); %>
+                </div>
+              </div>
+
               <div class="method_body">
+
                 <span class="method_title">Description</span>
                 <div class="method_description"><%= method.description %></div>
+
                 <span class="method_title">Parameters</span>
+
                 <div class="method_description">
                   <table class="params">
-                    <tr>
+                    <tr class="tr_head">
                       <th>Name</th>
                       <th>Located in</th>
                       <th>Description</th>

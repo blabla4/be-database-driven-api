@@ -16,6 +16,8 @@
     "mongoose": "latest",
     "restler": "latest",
     "vm": "latest",
-    "express-restify-mongoose": "latest"
+    "express-restify-mongoose": "latest",
+    "hue-module": "latest",
+    "color": "latest"
   }
 }
