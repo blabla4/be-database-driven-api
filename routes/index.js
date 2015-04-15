@@ -8,4 +8,20 @@ router.get('/', function(req, res) {
   });
 });
 
+router.get('/edit', function(req, res) {
+    res.render('editMenu', {});
+});
+
+
+router.get('/edit/api', function(req, res) {
+    res.render('editApi', {});
+});
+
+
+router.get('/edit/method', function(req, res) {
+  restClient.get('http://localhost:3000/apis').on('complete', function(data) {
+    res.render('editMethod', {apis: data});
+  });
+});
+
 module.exports = router;

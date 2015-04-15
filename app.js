@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var restify = require('express-restify-mongoose');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/be-database-driven-api');
+mongoose.connect('mongodb://10.134.15.103:27017/be-database-driven-api');
 mongoose.connection.once('open', function () {
   console.log('Connected to database');
 });

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/javascripts/libs/foundation/css/foundation.css">
+    <link rel="stylesheet" href="/stylesheets/codemirror.css">
+    <script type="text/javascript" src="/javascripts/libs/foundation/js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+    <div class="row">
+      <div class="large-12 columns">
+        <h2>Method Form</h2>
+        <form id="methodForm">
+          <div class="row">
+            <div class="large-10 columns">
+              <label>Select an api
+                <select name="api">
+                <% apis.forEach(function(api) {%>
+                  <option value=<%= api._id %>><%= api.name %></options>
+                <%})%>
+                </select>
+              </label>
+              <label>Method name
+                <input type="text" name="name">
+              </label>
+              <label>Api description
+                <input type="text" name="description">
+              </label>
+              <label>Request type
+                <select name="type">
+                  <option value="get">GET</option>
+                  <option value="post">POST</option>
+                  <option value="pull">PULL</option>
+                </select>
+              </label>
+              <label>Parameters
+                <label>Name
+                  <input type="text" name= "parameters[].name">
+                </label>
+                <label>Located In
+                  <input type="text" name= "parameters[].locatedIn">
+                </label>
+                <label>Description
+                  <input type="text" name= "parameters[].description">
+                </label>
+                <label>Required
+                  <select name="parameters[].required">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                  <!-- <input type="text" name= "parameters[].required"> -->
+                </label>
+                <label>Schema
+                  <input type="text" name= "parameters[].schema">
+                </label>
+                <label>Script
+                  <textarea id="script" type="text" name="script"></textarea>
+                </label>
+                <input type="submit" class="button" value="Submit">
+              </label>
+            </div>
+          </div>
+        </form>
+        <div class="large-10 columns" id="txt"></div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/javascripts/libs/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/libs/foundation/js/foundation.min.js"></script>
+    <script type="text/javascript" src="/javascripts/libs/form2js.js"></script>
+    <script src="/javascripts/libs/codemirror/lib/codemirror.js"></script>
+    <script src="/javascripts/libs/codemirror/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="/javascripts/editMethod.js"></script>
+    <script>
+      $(document).foundation();
+
+      var myCodeMirror = CodeMirror(document.getElementById("txt"), {
+        value: $("#script").val(),
+        mode:  "javascript"
+      });
+      $("#script").on("keyup", function() {
+        myCodeMirror.setValue($(this).val())
+      });
+    </script>
+  </body>
+</html>
