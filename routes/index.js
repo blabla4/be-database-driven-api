@@ -15,7 +15,7 @@ router.get('/create', function(req, res) {
 });
 
 /* Api édition */
-router.get('/', function(req, res) {
+router.get('/edit', function(req, res) {
   restClient.get('http://10.134.15.103/apis?populate=methods').on('complete', function(data) {
     res.render('edit', {apis: data});
   });

@@ -5,6 +5,7 @@ var helper = {
   get_ir_code: function(value) {
     return getKeyByValue(remote, value);
   },
+
   set_hue_color: function(host, key, light, color) {
     hue.load(host, key);
     hue.light(parseInt(light), function(light){
@@ -12,6 +13,7 @@ var helper = {
         hue.change(light.set({"on": true, "rgb":[c.red(),c.green(),c.blue()]}));
     });
   },
+
   set_hue_power: function(host, key, light, state) {
     hue.load(host, key);
     hue.light(parseInt(light), function(light){
@@ -25,6 +27,7 @@ var helper = {
       }
     });
   }
+
 };
 
 var getKeyByValue = function(dict, value) {
