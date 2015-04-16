@@ -11,6 +11,19 @@ var helper = {
         var c = Color(color);
         hue.change(light.set({"on": true, "rgb":[c.red(),c.green(),c.blue()]}));
     });
+  },
+  set_hue_power: function(host, key, light, state) {
+    hue.load(host, key);
+    hue.light(parseInt(light), function(light){
+      switch(state) {
+        case "on":
+          hue.change(light.set({"on":true}));
+          break;
+        case "off":
+          hue.change(light.set({"on":false}));
+          break;
+      }
+    });
   }
 };
 
