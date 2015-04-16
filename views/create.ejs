@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/javascripts/libs/foundation/css/foundation.css">
+    <link rel="stylesheet" href="/stylesheets/codemirror.css">
+    <script type="text/javascript" src="/javascripts/libs/foundation/js/vendor/modernizr.js"></script>
+    <script type="text/javascript" src="/javascripts/libs/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/libs/foundation/js/foundation.min.js"></script>
+    <script type="text/javascript" src="/javascripts/libs/form2js-bower/src/form2js.js"></script>
+    <script type="text/javascript" src="/javascripts/libs/codemirror/lib/codemirror.js"></script>
+    <script type="text/javascript" src="/javascripts/libs/codemirror/mode/javascript/javascript.js"></script>
+  </head>
+  <body>
+
+    <div class="row">
+      <div class="large-12 columns">
+
+        <h2>Créer une API</h2>
+
+            <label>
+              Nom
+              <input type="text" name="name">
+            </label>
+
+            <label>
+              Description
+              <input type="text" name="description">
+            </label>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+
+        <div class="large-11 columns">
+          <h4>Ajouter des méthodes</h4>
+        </div>
+        <div class="large-1 columns">
+          <button class="button round tiny">+</button>
+        </div>
+
+        <label>
+          Method name
+          <input type="text" name="name">
+        </label>
+
+        <label>
+          Api description
+          <input type="text" name="description">
+        </label>
+
+        <label>
+          Request type
+          <select name="type">
+            <option value="get">GET</option>
+            <option value="post">POST</option>
+            <option value="pull">PULL</option>
+          </select>
+        </label>
+
+        <div class="row">
+          <div class="large-12 columns">
+
+            <div class="large-11 columns">
+              <h5>Parameters</h5>
+            </div>
+            <div class="large-1 columns">
+              <button class="button round tiny">+</button>
+            </div>
+
+              <div class="large-2 columns">
+                <label>
+                  Name
+                  <input type="text" name= "parameters[].name">
+                </label>
+              </div>
+
+              <div class="large-2 columns">
+                <label>
+                  Located In
+                  <input type="text" name= "parameters[].locatedIn">
+                </label>
+              </div>
+
+              <div class="large-4 columns">
+                <label>
+                  Description
+                  <input type="text" name= "parameters[].description">
+                </label>
+              </div>
+
+              <div class="large-2 columns">
+                <label>
+                  Required
+                  <select name="parameters[].required">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="large-2 columns">
+                <label>
+                  Schema
+                  <input type="text" name= "parameters[].schema">
+                </label>
+              </div>
+
+            </div>
+          </div>
+
+          <label>
+            Script
+            <textarea id="script" type="text" name="script"></textarea>
+          </label>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <input type="submit" class="button" value="Créer">
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/javascripts/editApi.js"></script>
+    <script>
+      $(document).foundation();
+      var myCodeMirror = CodeMirror(document.getElementById("script"), {
+        value: $("#script").val(),
+        mode:  "javascript"
+      });
+      $("#script").on("keyup", function() {
+        myCodeMirror.setValue($(this).val())
+      });
+    </script>
+  </body>
+</html>

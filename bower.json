@@ -5,6 +5,8 @@
   "license": "MIT",
   "dependencies": {
       "jquery": "latest",
-      "codemirror": "latest"
+      "codemirror": "latest",
+      "foundation": "latest",
+      "form2js-bower": "latest"
   }
 }

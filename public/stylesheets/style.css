@@ -4,6 +4,25 @@
   padding: 5px;
 }
 
+#menu {
+  position: fixed;
+  top: 4%;
+  right: 2%;
+  background-color: rgb(240,240,240);
+  padding: 1%;
+  border-radius: 8px;
+}
+
+#menu a {
+  color: grey;
+  display: block;
+  text-decoration: none;
+}
+
+#menu a:hover {
+  text-decoration: underline;
+}
+
 body {
   font-family: 'Open Sans';
 }
