@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="large-12 columns">
+    <div class="large-11 columns">
+      <h4>Ajouter des méthodes</h4>
+    </div>
+
+    <div class="large-1 columns">
+      <button id="addMethod" class="button round tiny" type="button">+</button>
+    </div>
+  </div>
+</div>
+
+<div id="methods"></div>
+
+<div class="row" id="method" style="display:none;">
+  <div class="large-12 columns">
+    <h5 id="method_name"></h5>
+    <label>
+      Method name
+      <input type="text" name="methods[].name">
+    </label>
+
+    <label>
+      Api description
+      <input type="text" name="methods[].description">
+    </label>
+
+    <label>
+      Request type
+      <select name="methods[].type">
+        <option value="get">GET</option>
+        <option value="post">POST</option>
+        <option value="pull">PULL</option>
+      </select>
+    </label>
+
+    <% include param %>
+
+    <label id="script">
+      Script
+
+    </label>
+  </div>
+</div>

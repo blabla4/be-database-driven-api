@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/javascripts/libs/foundation/css/foundation.css">
-    <link rel="stylesheet" href="/stylesheets/codemirror.css">
+    <link rel="stylesheet" href="/javascripts/libs/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="/javascripts/libs/codemirror/theme/mdn-like.css">
     <script type="text/javascript" src="/javascripts/libs/foundation/js/vendor/modernizr.js"></script>
     <script type="text/javascript" src="/javascripts/libs/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/javascripts/libs/foundation/js/foundation.min.js"></script>
@@ -12,122 +13,95 @@
     <script type="text/javascript" src="/javascripts/libs/codemirror/mode/javascript/javascript.js"></script>
   </head>
   <body>
+    <form id="form">
+      <% include ./partials/create/api %>
 
-    <div class="row">
-      <div class="large-12 columns">
+      <% include ./partials/create/method %>
 
-        <h2>Créer une API</h2>
-
-            <label>
-              Nom
-              <input type="text" name="name">
-            </label>
-
-            <label>
-              Description
-              <input type="text" name="description">
-            </label>
-
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="large-12 columns">
-
-        <div class="large-11 columns">
-          <h4>Ajouter des méthodes</h4>
+      <div class="row">
+        <div class="large-12 columns">
+          <input type="button" class="button" value="Créer" id="debug">
         </div>
-        <div class="large-1 columns">
-          <button id="addMethod" class="button round tiny">+</button>
-        </div>
-        
-        <label>
-          Method name
-          <input type="text" name="name">
-        </label>
-
-        <label>
-          Api description
-          <input type="text" name="description">
-        </label>
-
-        <label>
-          Request type
-          <select name="type">
-            <option value="get">GET</option>
-            <option value="post">POST</option>
-            <option value="pull">PULL</option>
-          </select>
-        </label>
-
-        <div class="row">
-          <div class="large-12 columns">
-
-            <div class="large-11 columns">
-              <h5>Parameters</h5>
-            </div>
-            <div class="large-1 columns">
-              <button id="addParam" class="button round tiny">+</button>
-            </div>
-              <div id="params">
-                <div class="large-2 columns">
-                  <label>
-                    Name
-                    <input type="text" name= "parameters[].name">
-                  </label>
-                </div>
-
-                <div class="large-2 columns">
-                  <label>
-                    Located In
-                    <input type="text" name= "parameters[].locatedIn">
-                  </label>
-                </div>
-
-                <div class="large-4 columns">
-                  <label>
-                    Description
-                    <input type="text" name= "parameters[].description">
-                  </label>
-                </div>
-
-                <div class="large-2 columns">
-                  <label>
-                    Required
-                    <select name="parameters[].required">
-                      <option value="yes">Yes</option>
-                      <option value="no">No</option>
-                    </select>
-                  </label>
-                </div>
-
-                <div class="large-2 columns">
-                  <label>
-                    Schema
-                    <input type="text" name= "parameters[].schema">
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <label>
-            Script
-            <textarea id="script" type="text" name="script"></textarea>
-          </label>
-
       </div>
-    </div>
-
-    <div class="row">
-      <div class="large-12 columns">
-        <input type="submit" class="button" value="Créer">
-      </div>
-    </div>
+    </form>
 
     <script type="text/javascript" src="/javascripts/editApi.js"></script>
     <script>
       $(document).foundation();
+
+      var id = 0;
+      $("#addMethod").on('click', function() {
+        var _id = id;
+        var method = $("#method").clone();
+        method.attr("id", "method" + _id);
+        method.find("#method_name").attr("id", "method_name" + _id);
+        method.find("input").on('change', function() {
+          $("#method_name" + _id).html($(this)[0].value);
+        })
+        var _script = $("<input></input>", {type: "text", style:"display:none;", name:"methods["+_id+"].script"});
+        _script.appendTo(method);
+        var script = CodeMirror(method.find("#script").get(0), {
+          value: "function myScript()\n{\nreturn 100;\n}\n",
+          mode:  "javascript",
+          theme: "mdn-like",
+          styleActiveLine: true
+        });
+        script.on('change', function() {
+          _script.attr("value",script.getValue().replace(/(\r\n|\n|\r|\t)/gm," "));
+        })
+        script.setSize("100%","100%");
+        method.find("input")[0].name = "methods[" + _id + "].name";
+        method.find("input")[1].name = "methods[" + _id + "].description";
+        method.find("select")[0].name = "methods[" + _id + "].type";
+        method.appendTo($("#methods"));
+        method.show();
+
+        method.find("#addParam").attr("id", "addParam" + _id);
+        method.find("#params").attr("id", "params" + _id);
+
+        var idM = 0;
+        $("#addParam" + _id).on('click', function() {
+          var param = $("#param").clone();
+          param.attr("id", "param" + _id);
+          param.find("input")[0].name = "methods[" + _id + "].parameters[" + idM + "].name";
+          param.find("input")[1].name = "methods[" + _id + "].parameters[" + idM + "].locatedIn";
+          param.find("input")[2].name = "methods[" + _id + "].parameters[" + idM + "].description";
+          param.find("input")[3].name = "methods[" + _id + "].parameters[" + idM + "].schema";
+          param.find("select")[0].name = "methods[" + _id + "].parameters[" + idM + "].required";
+          param.appendTo($("#params" + _id));
+          param.show();
+
+          idM = idM + 1;
+        });
+
+        id = id + 1;
+      });
+      $("#debug").on('click',function() {
+        console.log(JSON.stringify(form2js('form')));
+        $.ajax({
+          url: 'http://10.134.15.103/apis',
+          data: {
+            "name": form2js('form').name,
+            "description": form2js('form').description
+          },
+          contentType: 'application/json; charset=utf-8',
+          dataType:'json',
+          type:'POST',
+          async:false,
+          success: function(response) {
+            console.log(JSON.stringify(response));
+          },
+          error: function(response, status, err) {
+            alert(response);
+          }
+      });
+      })
+/*
+      $('#form').submit(function(event) {
+        $("param").remove();
+        console.log(form2object('form'));
+      });*/
+      /*
       var myCodeMirror = CodeMirror(document.getElementById("script"), {
         value: $("#script").val(),
         mode:  "javascript"
@@ -144,6 +118,7 @@
       $("#addMethod").on('click', function() {
           $("#methods").append(methods);
       })
+      */
     </script>
   </body>
 </html>

@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="large-12 columns">
+    <div class="large-11 columns">
+      <h5>Parameters</h5>
+    </div>
+    <div class="large-1 columns">
+      <button id="addParam" class="button round tiny" type="button">+</button>
+    </div>
+
+    <div id="params"></div>
+
+
+    <div class="row" id="param" style="display:none;">
+      <div class="large-2 columns">
+        <label>
+          Name
+          <input type="text" name="methods[].parameters[].name">
+        </label>
+      </div>
+
+      <div class="large-2 columns">
+        <label>
+          Located In
+          <input type="text" name="methods[].parameters[].locatedIn">
+        </label>
+      </div>
+
+      <div class="large-4 columns">
+        <label>
+          Description
+          <input type="text" name="methods[].parameters[].description">
+        </label>
+      </div>
+
+      <div class="large-2 columns">
+        <label>
+          Required
+          <select name="methods[].parameters[].required">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="large-2 columns">
+        <label>
+          Schema
+          <input type="text" name="methods[].parameters[].schema">
+        </label>
+      </div>
+    </div>
+
+  </div>
+</div>
