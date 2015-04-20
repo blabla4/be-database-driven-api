@@ -80,10 +80,12 @@
         console.log(JSON.stringify(form2js('form')));
         $.ajax({
           url: 'http://10.134.15.103/apis',
-          data: {
+          data: JSON.stringify({
+            "host": "",
             "name": form2js('form').name,
-            "description": form2js('form').description
-          },
+            "description": form2js('form').description,
+            "methods": []
+          }),
           contentType: 'application/json; charset=utf-8',
           dataType:'json',
           type:'POST',
@@ -92,33 +94,11 @@
             console.log(JSON.stringify(response));
           },
           error: function(response, status, err) {
-            alert(response);
+            console.log(response);
           }
       });
       })
-/*
-      $('#form').submit(function(event) {
-        $("param").remove();
-        console.log(form2object('form'));
-      });*/
-      /*
-      var myCodeMirror = CodeMirror(document.getElementById("script"), {
-        value: $("#script").val(),
-        mode:  "javascript"
-      });
-      $("#script").on("keyup", function() {
-        myCodeMirror.setValue($(this).val())
-      });
 
-      var params = $("#params").html();
-      var methods = $("#methods").html();
-      $("#addParam").on('click', function() {
-          $("#params").append(params);
-      });
-      $("#addMethod").on('click', function() {
-          $("#methods").append(methods);
-      })
-      */
     </script>
   </body>
 </html>
