@@ -38,9 +38,9 @@
           <h4>Ajouter des méthodes</h4>
         </div>
         <div class="large-1 columns">
-          <button class="button round tiny">+</button>
+          <button id="addMethod" class="button round tiny">+</button>
         </div>
-
+        
         <label>
           Method name
           <input type="text" name="name">
@@ -67,47 +67,47 @@
               <h5>Parameters</h5>
             </div>
             <div class="large-1 columns">
-              <button class="button round tiny">+</button>
+              <button id="addParam" class="button round tiny">+</button>
             </div>
+              <div id="params">
+                <div class="large-2 columns">
+                  <label>
+                    Name
+                    <input type="text" name= "parameters[].name">
+                  </label>
+                </div>
 
-              <div class="large-2 columns">
-                <label>
-                  Name
-                  <input type="text" name= "parameters[].name">
-                </label>
+                <div class="large-2 columns">
+                  <label>
+                    Located In
+                    <input type="text" name= "parameters[].locatedIn">
+                  </label>
+                </div>
+
+                <div class="large-4 columns">
+                  <label>
+                    Description
+                    <input type="text" name= "parameters[].description">
+                  </label>
+                </div>
+
+                <div class="large-2 columns">
+                  <label>
+                    Required
+                    <select name="parameters[].required">
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div class="large-2 columns">
+                  <label>
+                    Schema
+                    <input type="text" name= "parameters[].schema">
+                  </label>
+                </div>
               </div>
-
-              <div class="large-2 columns">
-                <label>
-                  Located In
-                  <input type="text" name= "parameters[].locatedIn">
-                </label>
-              </div>
-
-              <div class="large-4 columns">
-                <label>
-                  Description
-                  <input type="text" name= "parameters[].description">
-                </label>
-              </div>
-
-              <div class="large-2 columns">
-                <label>
-                  Required
-                  <select name="parameters[].required">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                  </select>
-                </label>
-              </div>
-
-              <div class="large-2 columns">
-                <label>
-                  Schema
-                  <input type="text" name= "parameters[].schema">
-                </label>
-              </div>
-
             </div>
           </div>
 
@@ -135,6 +135,15 @@
       $("#script").on("keyup", function() {
         myCodeMirror.setValue($(this).val())
       });
+
+      var params = $("#params").html();
+      var methods = $("#methods").html();
+      $("#addParam").on('click', function() {
+          $("#params").append(params);
+      });
+      $("#addMethod").on('click', function() {
+          $("#methods").append(methods);
+      })
     </script>
   </body>
 </html>
