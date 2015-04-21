@@ -53,7 +53,6 @@ window.onload = function() {
   });
 
   $("#debug").on('click',function() {
-    console.log(JSON.stringify(form2js('form')));
     $("#param").remove();
     $("#method").remove();
     postForm(form2js('form'));
