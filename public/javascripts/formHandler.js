@@ -52,7 +52,7 @@ window.onload = function() {
     id = id + 1;
   });
 
-  $("#debug").on('click',function() {
+  $("#form").submit(function() {
     $("#param").remove();
     $("#method").remove();
     postForm(form2js('form'));

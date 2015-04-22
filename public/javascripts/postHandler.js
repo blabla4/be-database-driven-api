@@ -1,3 +1,5 @@
+var apiId = 0;
+var methodsId = [];
 
 function postForm(form) {
   postApi({
@@ -17,21 +19,31 @@ function postApi(api, form) {
     type:'POST',
     async:false,
     success: function(response) {
+      apiId = response._id;
       form.methods.forEach(function(method) {
-        postMehod({
-          "name": method.name,
-          "description": method.description,
-          "type": method.type,
-          "parameters": {
-            "name": method.parameters.name,
-            "locatedIn": method.parameters.locatedIn,
-            "description": method.parameters.description,
-            "required": method.parameters.required,
-            "schema": method.parameters.schema
-          },
-          "script": method.script
-        }, response._id);
+        if(method.name !== undefined && method.name !== "") {
+          var params = []
+          if(method.parameters !== undefined) {
+            method.parameters.forEach(function(param) {
+              params.push({
+                "name": param.name,
+                "locatedIn": param.locatedIn,
+                "description": param.description,
+                "required": param.required,
+                "schema": param.schema
+              });
+            });
+          }
+          postMehod({
+            "name": method.name,
+            "description": method.description,
+            "type": method.type,
+            "parameters": params,
+            "script": method.script
+          }, response._id);
+        }
       });
+      putMethods();
     },
     error: function(response, status, err) {
 
@@ -48,29 +60,23 @@ function postMehod(method, apiId) {
     type:'POST',
     async:false,
     success: function(response) {
-      $.ajax({
-        url: 'http://10.134.15.103/apis/' + apiId,
-        type:'GET',
-        async:false,
-        success: function(response) {
-          $.ajax({
-            url: 'http://10.134.15.103/apis/' + apiId,
-            data: JSON.stringify({"methods": response.methods.push(method)}),
-            contentType: 'application/json; charset=utf-8',
-            type:'PUT',
-            async:false,
-            success: function(response) {
+      methodsId.push(response._id);
+    },
+    error: function(response, status, err) {
 
-            },
-            error: function(response, status, err) {
+    }
+  });
+}
 
-            }
-          });
-        },
-        error: function(response, status, err) {
+function putMethods() {
+  $.ajax({
+    url: 'http://10.134.15.103/apis/' + apiId,
+    data: JSON.stringify({"methods": methodsId}),
+    contentType: 'application/json; charset=utf-8',
+    type:'PUT',
+    async:false,
+    success: function(response) {
 
-        }
-      });
     },
     error: function(response, status, err) {
 

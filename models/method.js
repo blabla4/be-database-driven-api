@@ -5,6 +5,7 @@ var methodSchema = mongoose.Schema({
   description: String,
   type: String,
   parameters: Array,
+  script: String,
 }, {collection: 'method'});
 
 module.exports = mongoose.model('method', methodSchema);
